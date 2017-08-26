@@ -25,8 +25,14 @@ for subreddit in SUBREDDITS:
         if 'subreddit' in csv:
             print(df.ix[0])
             df.drop(0, inplace=True)
-        ax = sns.barplot(ax=ax, x='count', y='domain', data=df.head(N_DOMAINS), orient='h')
-        ax.set_title('{} : {}'.format(subreddit, csv))
+        ax = sns.barplot(ax=ax, x='count', y='domain', data=df.head(N_DOMAINS), orient='h', color='b')
+        if 'wikipedia' in csv:
+            ax.set_ylabel('Wikipedia page')
+            ax.set_title('Wikipedia pages linked to in comments for r/{}'.format(subreddit))
+        elif 'subreddit' in csv:
+            ax.set_ylabel('Subreddit')
+            ax.set_title('Other subreddits linked to in comments for r/{}'.format(subreddit))
+        ax.set_xlabel('Number of references')
         fig.tight_layout()
         fig.savefig('output/{}_{}.png'.format(subreddit, csv.replace('/', '_')))
 
