@@ -64,7 +64,12 @@ for csv in CSVS:
     ax = sns.barplot(ax=ax, x='percent', y='domain',
                      hue='subreddit', data=df, orient='h',
                      palette='bright')
-    ax.set_title('{} overlap'.format(csv))
+
+    if 'subreddit' in csv:
+        ax.set_title('Overlap of subreddit links b/w r/altright and r/The_Donald')
+    elif 'wikipedia' in csv:
+        ax.set_title('Overlap of Wikipedia links b/w r/altright and r/The_Donald')
+    ax.set_xlabel('Percent of references')
 
     # the way ax.patches is ordered
     # is such that all bars for one hue are plotted first,
